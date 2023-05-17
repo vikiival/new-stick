@@ -14,9 +14,12 @@ const STARTING_BLOCK = 323750; //618838;
 processor.setTypesBundle('statemine')
 processor.setBlockRange({ from: STARTING_BLOCK });
 
+const ARCHIVE_URL = 'http://localhost:8888/graphql';
+const NODE_URL = 'wss://westmint-rpc.polkadot.io';
+
 // const ARCHIVE = 'https://statemine.archive.subsquid.io/graphql';
-const archive = lookupArchive('statemine', {release: 'FireSquid'} )
-const chain = 'wss://statemine-rpc.polkadot.io'
+const archive = ARCHIVE_URL
+const chain = NODE_URL
 
 processor.setDataSource({
     archive,
