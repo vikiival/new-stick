@@ -24,3 +24,19 @@ export enum Event {
   transfer = 'Nfts.Transferred',
 }
 
+export enum NewNonFungible {
+  // changeCollectionConfig = 'Nfts.CollectionConfigChanged', // should use extrisnic instead of event
+  // lockCollection = 'Nfts.CollectionLocked',
+  // updateCollectionMintSettings = 'Nfts.CollectionMintSettingsUpdated', // should use extrisnic instead of event
+  // lockItemProperties = 'Nfts.ItemPropertiesLocked',
+  // lockItemTransfer = 'Nfts.ItemTransferLocked',
+  // unlockItemTransfer = 'Nfts.ItemTransferUnlocked',
+  setPalletAttribute = 'Nfts.PalletAttributeSet',
+  setPreSignedAttributes = 'Nfts.PreSignedAttributesSet',
+  cancelSwap = 'Nfts.SwapCancelled',
+  claimSwap = 'Nfts.SwapClaimed',
+  createSwap = 'Nfts.SwapCreated',
+  sendTip = 'Nfts.TipSent', // can be used for marking royaltyPaid
+}
+
+
