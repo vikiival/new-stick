@@ -38,3 +38,10 @@ export function isNewUnique(context: Context, event: Event): boolean {
   return context.event.name === event;
 }
 
+export function isUniquePallet(context: Context): boolean {
+  return context.event.name.startsWith('Uniques')
+}
+
+export function isNonFungiblePallet(context: Context): boolean {
+  return context.event.name.startsWith('Nfts')
+}
