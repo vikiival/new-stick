@@ -5,7 +5,7 @@ export enum Event {
   changeTeam = 'Nfts.TeamChanged',
   clearAttribute = 'Nfts.AttributeCleared',
   clearCollectionMetadata = 'Nfts.CollectionMetadataCleared',
-  clearMetadata = 'Nfts.MetadataCleared',
+  clearMetadata = 'Nfts.ItemMetadataCleared',
   clearPrice = 'Nfts.ItemPriceRemoved',
   createCollection = 'Nfts.Created', // should use extrisnic instead of event
   createItem = 'Nfts.Issued',
@@ -16,7 +16,7 @@ export enum Event {
   setAttribute = 'Nfts.AttributeSet',
   setCollectionMaxSupply = 'Nfts.CollectionMaxSupplySet',
   setCollectionMetadata = 'Nfts.CollectionMetadataSet',
-  setMetadata = 'Nfts.MetadataSet',
+  setMetadata = 'Nfts.ItemMetadataSet',
   setPrice = 'Nfts.ItemPriceSet',
   sold = 'Nfts.ItemBought',
   thaw = 'Nfts.Thawed',
