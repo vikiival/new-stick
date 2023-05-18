@@ -8,17 +8,10 @@ import { BurnTokenEvent, BuyTokenEvent, ChangeCollectionOwnerEvent, ChangeCollec
 import { Event } from '../../processable';
 
 export function getCreateCollectionEvent(ctx: Context): CreateCollectionEvent {
-  const event = new events.UniquesCreatedEvent(ctx)
-  if (event.isV1) {
-    const [classId, creator, owner] = event.asV1
-    return { id: classId.toString(), caller: addressOf(creator), owner: addressOf(owner) }
-  }
-  if (event.isV700) {
-    const { class: classId, creator, owner } = event.asV700
-    return { id: classId.toString(), caller: addressOf(creator), owner: addressOf(owner) }
-  }
-  if (event.isV9230) {
-    const { collection: classId, creator, owner } = event.asV9230
+  const event = new events.NftsCreatedEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, creator, owner } = event.asV9370
     return { id: classId.toString(), caller: addressOf(creator), owner: addressOf(owner) }
   }
   warn(Interaction.CREATE, 'USING UNSAFE GETTER! PLS UPDATE TYPES!')
@@ -31,17 +24,10 @@ export function getCreateCollectionEvent(ctx: Context): CreateCollectionEvent {
 }
 
 export function getForceCreateCollectionEvent(ctx: Context): ForceCreateCollectionEvent {
-  const event = new events.UniquesForceCreatedEvent(ctx)
-  if (event.isV1) {
-    const [classId, owner] = event.asV1
-    return { id: classId.toString(), owner: addressOf(owner) }
-  }
-  if (event.isV700) {
-    const { class: classId, owner } = event.asV700
-    return { id: classId.toString(), owner: addressOf(owner) }
-  }
-  if (event.isV9230) {
-    const { collection: classId, owner } = event.asV9230
+  const event = new events.NftsForceCreatedEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, owner } = event.asV9370
     return { id: classId.toString(), owner: addressOf(owner) }
   }
   ctx.log.warn('USING UNSAFE GETTER! PLS UPDATE TYPES!')
@@ -50,17 +36,10 @@ export function getForceCreateCollectionEvent(ctx: Context): ForceCreateCollecti
 }
 
 export function getCreateTokenEvent(ctx: Context): CreateTokenEvent {
-  const event = new events.UniquesIssuedEvent(ctx)
-  if (event.isV1) {
-    const [classId, instanceId, owner] = event.asV1
-    return { collectionId: classId.toString(), owner: addressOf(owner), sn: instanceId.toString() }
-  }
-  if (event.isV700) {
-    const { class: classId, instance: instanceId, owner } = event.asV700
-    return { collectionId: classId.toString(), owner: addressOf(owner), sn: instanceId.toString() }
-  }
-  if (event.isV9230) {
-    const { collection: classId, item: instanceId, owner } = event.asV9230
+  const event = new events.NftsIssuedEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, item: instanceId, owner } = event.asV9370
     return { collectionId: classId.toString(), owner: addressOf(owner), sn: instanceId.toString() }
   }
   ctx.log.warn('USING UNSAFE GETTER! PLS UPDATE TYPES!')
@@ -73,17 +52,10 @@ export function getCreateTokenEvent(ctx: Context): CreateTokenEvent {
 }
 
 export function getTransferTokenEvent(ctx: Context): TransferTokenEvent {
-  const event = new events.UniquesTransferredEvent(ctx)
-  if (event.isV1) {
-    const [classId, instanceId, from, to] = event.asV1
-    return { collectionId: classId.toString(), caller: addressOf(from), sn: instanceId.toString(), to: addressOf(to), }
-  }
-  if (event.isV700) {
-    const { class: classId, instance: instanceId, from, to } = event.asV700
-    return { collectionId: classId.toString(), caller: addressOf(from), sn: instanceId.toString(), to: addressOf(to), }
-  }
-  if (event.isV9230) {
-    const { collection: classId, item: instanceId, from, to } = event.asV9230
+  const event = new events.NftsTransferredEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, item: instanceId, from, to } = event.asV9370
     return { collectionId: classId.toString(), caller: addressOf(from), sn: instanceId.toString(), to: addressOf(to) }
   }
   ctx.log.warn('USING UNSAFE GETTER! PLS UPDATE TYPES!')
@@ -97,17 +69,10 @@ export function getTransferTokenEvent(ctx: Context): TransferTokenEvent {
 }
 
 export function getBurnTokenEvent(ctx: Context): BurnTokenEvent {
-  const event = new events.UniquesBurnedEvent(ctx)
-  if (event.isV1) {
-    const [classId, instanceId, owner] = event.asV1
-    return { collectionId: classId.toString(), owner: addressOf(owner), sn: instanceId.toString() }
-  }
-  if (event.isV700) {
-    const { class: classId, instance: instanceId, owner } = event.asV700
-    return { collectionId: classId.toString(), owner: addressOf(owner), sn: instanceId.toString() }
-  }
-  if (event.isV9230) {
-    const { collection: classId, item: instanceId, owner } = event.asV9230
+  const event = new events.NftsBurnedEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, item: instanceId, owner } = event.asV9370
     return { collectionId: classId.toString(), owner: addressOf(owner), sn: instanceId.toString() }
   }
   ctx.log.warn('USING UNSAFE GETTER! PLS UPDATE TYPES!')
@@ -120,17 +85,10 @@ export function getBurnTokenEvent(ctx: Context): BurnTokenEvent {
 }
 
 export function getDestroyCollectionEvent(ctx: Context): DestroyCollectionEvent {
-  const event = new events.UniquesDestroyedEvent(ctx)
-  if (event.isV1) {
-    const classId = event.asV1
-    return { id: classId.toString() }
-  }
-  if (event.isV700) {
-    const { class: classId } = event.asV700
-    return { id: classId.toString() }
-  }
-  if (event.isV9230) {
-    const { collection: classId } = event.asV9230
+  const event = new events.NftsDestroyedEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId } = event.asV9370
     return { id: classId.toString() }
   }
 
@@ -140,10 +98,10 @@ export function getDestroyCollectionEvent(ctx: Context): DestroyCollectionEvent 
 }
 
 export function getListTokenEvent(ctx: Context): ListTokenEvent {
-  const event = new events.UniquesItemPriceSetEvent(ctx)
+  const event = new events.NftsItemPriceSetEvent(ctx)
 
-  if (event.isV9270) {
-    const { collection: classId, item: instanceId, price } = event.asV9270
+  if (event.isV9370) {
+    const { collection: classId, item: instanceId, price } = event.asV9370
     return { collectionId: classId.toString(), sn: instanceId.toString(), price }
   }
 
@@ -157,10 +115,10 @@ export function getListTokenEvent(ctx: Context): ListTokenEvent {
 }
 
 export function getUnListTokenEvent(ctx: Context): ListTokenEvent {
-  const event = new events.UniquesItemPriceRemovedEvent(ctx)
+  const event = new events.NftsItemPriceRemovedEvent(ctx)
 
-  if (event.isV9270) {
-    const { collection: classId, item: instanceId } = event.asV9270
+  if (event.isV9370) {
+    const { collection: classId, item: instanceId } = event.asV9370
     return { collectionId: classId.toString(), sn: instanceId.toString(), price: 0n }
   }
 
@@ -182,16 +140,16 @@ export function getPriceTokenEvent(ctx: Context): ListTokenEvent {
 }
 
 export function getBuyTokenEvent(ctx: Context): BuyTokenEvent {
-  const event = new events.UniquesItemBoughtEvent(ctx)
+  const event = new events.NftsItemBoughtEvent(ctx)
 
-  if (event.isV9270) {
+  if (event.isV9370) {
     const {
       collection: classId,
       item: instanceId,
       price,
       seller,
       buyer,
-    } = event.asV9270
+    } = event.asV9370
     return {
       collectionId: classId.toString(), caller: addressOf(buyer), sn: instanceId.toString(), price: BigInt(price ?? 0), currentOwner: addressOf(seller),
     }
@@ -210,9 +168,9 @@ export function getBuyTokenEvent(ctx: Context): BuyTokenEvent {
 }
 
 export function getLockCollectionEvent(ctx: Context): LockCollectionEvent {
-  const event = new events.UniquesCollectionMaxSupplySetEvent(ctx)
-  if (event.isV9230) {
-    const { collection: classId, maxSupply: max } = event.asV9230
+  const event = new events.NftsCollectionMaxSupplySetEvent(ctx)
+  if (event.isV9370) {
+    const { collection: classId, maxSupply: max } = event.asV9370
     return { id: classId.toString(), max }
   }
   ctx.log.warn('USING UNSAFE GETTER! PLS UPDATE TYPES!')
@@ -221,17 +179,10 @@ export function getLockCollectionEvent(ctx: Context): LockCollectionEvent {
 }
 
 export function getChangeCollectionOwnerEvent(ctx: Context): ChangeCollectionOwnerEvent {
-  const event = new events.UniquesOwnerChangedEvent(ctx)
-  if (event.isV1) {
-    const [classId, newOwner] = event.asV1
-    return { id: classId.toString(), owner: addressOf(newOwner) }
-  }
-  if (event.isV700) {
-    const { class: classId, newOwner } = event.asV700
-    return { id: classId.toString(), owner: addressOf(newOwner) }
-  }
-  if (event.isV9230) {
-    const { collection: classId, newOwner } = event.asV9230
+  const event = new events.NftsOwnerChangedEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, newOwner } = event.asV9370
     return { id: classId.toString(), owner: addressOf(newOwner) }
   }
 
@@ -242,9 +193,9 @@ export function getChangeCollectionOwnerEvent(ctx: Context): ChangeCollectionOwn
 }
 
 export function getClearCollectionMetadataEvent(ctx: Context): SetMetadata {
-  const event = new events.UniquesCollectionMetadataClearedEvent(ctx)
-  if (event.isV9230) {
-    const { collection: classId } = event.asV9230
+  const event = new events.NftsCollectionMetadataClearedEvent(ctx)
+  if (event.isV9370) {
+    const { collection: classId } = event.asV9370
     return { collectionId: classId.toString() }
   }
   ctx.log.warn('USING UNSAFE GETTER! PLS UPDATE TYPES!')
@@ -253,9 +204,9 @@ export function getClearCollectionMetadataEvent(ctx: Context): SetMetadata {
 }
 
 export function getCreateCollectionMetadataEvent(ctx: Context): SetMetadata {
-  const event = new events.UniquesCollectionMetadataSetEvent(ctx)
-  if (event.isV9230) {
-    const { collection: classId, data, isFrozen } = event.asV9230
+  const event = new events.NftsCollectionMetadataSetEvent(ctx)
+  if (event.isV9370) {
+    const { collection: classId, data } = event.asV9370
     return { collectionId: classId.toString(), metadata: data.toString() }
   }
 
@@ -265,13 +216,10 @@ export function getCreateCollectionMetadataEvent(ctx: Context): SetMetadata {
 }
 
 export function getClearClassMetadataEvent(ctx: Context): SetMetadata {
-  const event = new events.UniquesClassMetadataClearedEvent(ctx)
-  if (event.isV1) {
-    const classId = event.asV1
-    return { collectionId: classId.toString() }
-  }
-  if (event.isV700) {
-    const { class: classId } = event.asV700
+  const event = new events.NftsCollectionMetadataSetEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, data } = event.asV9370
     return { collectionId: classId.toString() }
   }
 
@@ -281,13 +229,10 @@ export function getClearClassMetadataEvent(ctx: Context): SetMetadata {
 }
 
 export function getCreateClassMetadataEvent(ctx: Context): SetMetadata {
-  const event = new events.UniquesClassMetadataSetEvent(ctx)
-  if (event.isV1) {
-    const [classId, data, isFrozen] = event.asV1
-    return { collectionId: classId.toString(), metadata: data.toString() }
-  }
-  if (event.isV700) {
-    const { class: classId, data, isFrozen } = event.asV700
+  const event = new events.NftsCollectionMetadataSetEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, data } = event.asV9370
     return { collectionId: classId.toString(), metadata: data.toString() }
   }
 
@@ -297,27 +242,14 @@ export function getCreateClassMetadataEvent(ctx: Context): SetMetadata {
 }
 
 export function getCreateMetadataEvent(ctx: Context): SetMetadata {
-  const event = new events.UniquesMetadataSetEvent(ctx)
-  if (event.isV1) {
-    const [classId, instanceId, data, isFrozen] = event.asV1
-    return { collectionId: classId.toString(), sn: instanceId.toString(), metadata: data.toString() }
-  }
-  if (event.isV700) {
-    const {
-      class: classId,
-      instance: instanceId,
-      data,
-      isFrozen,
-    } = event.asV700
-    return { collectionId: classId.toString(), sn: instanceId.toString(), metadata: data.toString() }
-  }
-  if (event.isV9230) {
+  const event = new events.NftsItemMetadataSetEvent(ctx)
+
+  if (event.isV9370) {
     const {
       collection: classId,
       item: instanceId,
       data,
-      isFrozen,
-    } = event.asV9230
+    } = event.asV9370
     return { collectionId: classId.toString(), sn: instanceId.toString(), metadata: data.toString() }
   }
 
@@ -332,17 +264,10 @@ export function getCreateMetadataEvent(ctx: Context): SetMetadata {
 }
 
 export function getClearMetadataEvent(ctx: Context): SetMetadata {
-  const event = new events.UniquesMetadataClearedEvent(ctx)
-  if (event.isV1) {
-    const [classId, instanceId] = event.asV1
-    return { collectionId: classId.toString(), sn: instanceId.toString() }
-  }
-  if (event.isV700) {
-    const { class: classId, instance: instanceId } = event.asV700
-    return { collectionId: classId.toString(), sn: instanceId.toString() }
-  }
-  if (event.isV9230) {
-    const { collection: classId, item: instanceId } = event.asV9230
+  const event = new events.NftsItemMetadataClearedEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, item: instanceId } = event.asV9370
     return { collectionId: classId.toString(), sn: instanceId.toString() }
   }
 
@@ -355,9 +280,9 @@ export function getClearMetadataEvent(ctx: Context): SetMetadata {
 
 export function getMetadataEvent(ctx: Context): SetMetadata {
   switch (ctx.event.name) {
-    case Event.clearClassMetadata:
+    case Event.clearCollectionMetadata:
       return getClearClassMetadataEvent(ctx)
-    case Event.setClassMetadata:
+    case Event.setCollectionMetadata:
       return getCreateClassMetadataEvent(ctx)
     case Event.setCollectionMetadata:
       return getCreateCollectionMetadataEvent(ctx)
@@ -375,27 +300,14 @@ export function getMetadataEvent(ctx: Context): SetMetadata {
 function getSetAttributeEvent(
   ctx: Context
 ): SetAttribute {
-  const event = new events.UniquesAttributeSetEvent(ctx)
-  if (event.isV1) {
-    const [classId, instanceId, key, value] = event.asV1
-    return { collectionId: classId.toString(), sn: instanceId?.toString(), trait: key.toString(), value: value.toString() }
-  }
-  if (event.isV700) {
-    const {
-      class: classId,
-      maybeInstance: instanceId,
-      key,
-      value,
-    } = event.asV700
-    return { collectionId: classId.toString(), sn: instanceId?.toString(), trait: key.toString(), value: value.toString() }
-  }
-  if (event.isV9230) {
+  const event = new events.NftsAttributeSetEvent(ctx)
+  if (event.isV9370) {
     const {
       collection: classId,
       maybeItem: instanceId,
       key,
       value,
-    } = event.asV9230
+    } = event.asV9370
     return { collectionId: classId.toString(), sn: instanceId?.toString(), trait: key.toString(), value: value.toString() }
   }
 
@@ -410,18 +322,10 @@ function getSetAttributeEvent(
 }
 
 function getClearAttributeEvent(ctx: Context): SetAttribute {
-  const event = new events.UniquesAttributeClearedEvent(ctx)
+  const event = new events.NftsAttributeClearedEvent(ctx)
 
-  if (event.isV1) {
-    const [classId, instanceId, key] = event.asV1
-    return { collectionId: classId.toString(), sn: instanceId?.toString(), trait: key.toString() }
-  }
-  if (event.isV700) {
-    const { class: classId, maybeInstance: instanceId, key } = event.asV700
-    return { collectionId: classId.toString(), sn: instanceId?.toString(), trait: key.toString() }
-  }
-  if (event.isV9230) {
-    const { collection: classId, maybeItem: instanceId, key } = event.asV9230
+  if (event.isV9370) {
+    const { collection: classId, maybeItem: instanceId, key } = event.asV9370
     return { collectionId: classId.toString(), sn: instanceId?.toString(), trait: key.toString() }
   }
 
@@ -448,19 +352,17 @@ export function getAttributeEvent(ctx: Context): SetAttribute {
 }
 
 export function getChangeTeamEvent(ctx: Context): ChangeCollectionTeam {
-  const event = new events.UniquesTeamChangedEvent(ctx)
-  if (event.isV1) {
-    const [classId, issuer, admin, freezer] = event.asV1
+  const event = new events.NftsTeamChangedEvent(ctx)
+
+  if (event.isV9370) {
+    const { collection: classId, issuer, admin, freezer } = event.asV9370
     return { id: classId.toString(), issuer: addressOf(issuer), admin: addressOf(admin), freezer: addressOf(freezer) }
   }
-  if (event.isV700) {
-    const { class: classId, issuer, admin, freezer } = event.asV700
-    return { id: classId.toString(), issuer: addressOf(issuer), admin: addressOf(admin), freezer: addressOf(freezer) }
-  }
-  if (event.isV9230) {
-    const { collection: classId, issuer, admin, freezer } = event.asV9230
-    return { id: classId.toString(), issuer: addressOf(issuer), admin: addressOf(admin), freezer: addressOf(freezer) }
-  }
+
+  // if (event.isV9400) {
+  //   const { collection: classId, issuer, admin, freezer } = event.asV9400
+  //   return { id: classId.toString(), issuer: addressOf(issuer), admin: addressOf(admin), freezer: addressOf(freezer) }
+  // }
 
   ctx.log.warn('USING UNSAFE GETTER! PLS UPDATE TYPES!')
   const {
