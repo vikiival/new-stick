@@ -25,7 +25,7 @@ type CollectionEntity @entity {
   type: CollectionType
   updatedAt: DateTime!
   volume: BigInt!
-  version: Int!
+  version: Int! # one for Uniques, 2 for Nfts
 }
 
 type NFTEntity @entity {
@@ -49,8 +49,9 @@ type NFTEntity @entity {
   recipient: String
   royalty: Float
   sn: String!
+  # transferable: Boolean!
   updatedAt: DateTime!
-  version: Int!
+  version: Int! 
 }
 
 type MetadataEntity @entity {
@@ -118,4 +119,5 @@ enum Interaction {
   UNLIST
   LOCK
   CHANGEISSUER
+  PAY_ROYALTY
 }
