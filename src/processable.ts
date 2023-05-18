@@ -31,8 +31,8 @@ export enum NewNonFungible {
   // lockItemProperties = 'Nfts.ItemPropertiesLocked',
   // lockItemTransfer = 'Nfts.ItemTransferLocked',
   // unlockItemTransfer = 'Nfts.ItemTransferUnlocked',
-  setPalletAttribute = 'Nfts.PalletAttributeSet',
-  setPreSignedAttributes = 'Nfts.PreSignedAttributesSet',
+  // setPalletAttribute = 'Nfts.PalletAttributeSet', // can skip this
+  // setPreSignedAttributes = 'Nfts.PreSignedAttributesSet',
   cancelSwap = 'Nfts.SwapCancelled',
   claimSwap = 'Nfts.SwapClaimed',
   createSwap = 'Nfts.SwapCreated',
