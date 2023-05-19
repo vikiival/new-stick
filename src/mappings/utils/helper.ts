@@ -45,3 +45,7 @@ export function isUniquePallet(context: Context): boolean {
 export function isNonFungiblePallet(context: Context): boolean {
   return context.event.name.startsWith('Nfts')
 }
+
+export function str<T extends Object>(value: T): string {
+  return value?.toString();
+}
