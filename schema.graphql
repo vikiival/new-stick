@@ -102,10 +102,39 @@ type CollectionEvent implements EventType @entity {
   collection: CollectionEntity!
 }
 
+type Swap @entity {
+  id: ID! # should be addr-id-amount?
+  blockNumber: BigInt!
+  caller: String!
+  createdAt: DateTime!
+  # events: [OfferEvent!] @derivedFrom(field: "offer")
+  expiration: BigInt!
+  nft: NFTEntity!
+  price: BigInt!
+  swapCollection: CollectionEntity
+  swapItem: NFTEntity
+  surcharge: SwapSurchargeType
+  status: SwapStatus!
+  updatedAt: DateTime
+}
+
+
 enum CollectionType {
   Issuer
   HolderOf
   Public
+}
+
+enum SwapSurchargeType {
+  Send
+  Receive
+}
+
+enum SwapStatus {
+  ACTIVE
+  ACCEPTED
+  EXPIRED
+  WITHDRAWN
 }
 
 enum Interaction {
