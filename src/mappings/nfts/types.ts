@@ -7,3 +7,18 @@ export type WithAmount = {
 export type PayRoyaltyEvent = BaseTokenEvent & WithAmount & {
   recipient: string;
 }
+
+export type CreateSwapEvent = BaseTokenEvent & WithAmount & {
+  expiresAt: bigint;
+  surcharge?: 'Send' | 'Receive';
+  swapCollectionId: string;
+  swapSn?: string;
+}
+
+export type CancelSwapEvent = CreateSwapEvent
+
+export type ClaimSwapEvent = CreateSwapEvent & {
+  swapSn: string;
+  owner: string;
+  swapOwner: string;
+}
