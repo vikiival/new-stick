@@ -22,7 +22,7 @@ type CollectionEntity @entity {
   nfts: [NFTEntity!] @derivedFrom(field: "collection")
   ownerCount: Int!
   supply: Int!
-  type: CollectionType
+  type: CollectionType!
   updatedAt: DateTime!
   volume: BigInt!
   version: Int! # one for Uniques, 2 for Nfts

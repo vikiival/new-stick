@@ -4,12 +4,16 @@ import {Attribute} from "./_attribute"
 import {CollectionEvent} from "./collectionEvent.model"
 import {MetadataEntity} from "./metadataEntity.model"
 import {NFTEntity} from "./nftEntity.model"
+import {CollectionType} from "./_collectionType"
 
 @Entity_()
 export class CollectionEntity {
     constructor(props?: Partial<CollectionEntity>) {
         Object.assign(this, props)
     }
+
+    @Column_("text", {nullable: true})
+    allowedCollection!: string | undefined | null
 
     @Column_("jsonb", {transformer: {to: obj => obj == null ? undefined : obj.map((val: any) => val.toJSON()), from: obj => obj == null ? undefined : marshal.fromList(obj, val => new Attribute(undefined, marshal.nonNull(val)))}, nullable: true})
     attributes!: (Attribute)[] | undefined | null
@@ -80,9 +84,15 @@ export class CollectionEntity {
     @Column_("int4", {nullable: false})
     supply!: number
 
+    @Column_("varchar", {length: 8, nullable: false})
+    type!: CollectionType
+
     @Column_("timestamp with time zone", {nullable: false})
     updatedAt!: Date
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     volume!: bigint
+
+    @Column_("int4", {nullable: false})
+    version!: number
 }
