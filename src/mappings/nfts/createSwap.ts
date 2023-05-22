@@ -6,7 +6,7 @@ import {
 } from '../../model'
 import { createEvent } from '../shared/event'
 import { unwrap } from '../utils/extract'
-import { debug, pending, warn } from '../utils/logger'
+import { debug, pending, success, warn } from '../utils/logger'
 import { Context, createSwapId, createTokenId } from '../utils/types'
 import { getCreateSwapEvent } from './getters'
 
@@ -37,8 +37,8 @@ export async function handleSwapCreate(context: Context): Promise<void> {
     const target = await get(context.store, CE, event.target.collectionId);
     swap.collection = target;
   }
-
-  await context.store.save(swap);
+  success(OPERATION, swapId);
+  // await context.store.save(swap);
   // todo create event
   // entity.swap = swap;
 }
