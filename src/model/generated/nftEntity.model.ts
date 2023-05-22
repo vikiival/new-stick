@@ -4,6 +4,7 @@ import {Attribute} from "./_attribute"
 import {CollectionEntity} from "./collectionEntity.model"
 import {Event} from "./event.model"
 import {MetadataEntity} from "./metadataEntity.model"
+import {Swap} from "./swap.model"
 
 @Entity_()
 export class NFTEntity {
@@ -76,6 +77,10 @@ export class NFTEntity {
     @Column_("text", {nullable: false})
     sn!: string
 
+
     @Column_("timestamp with time zone", {nullable: false})
     updatedAt!: Date
+
+    @Column_("int4", {nullable: false})
+    version!: number
 }
